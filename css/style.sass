@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap')
+
+$size: 16px
+
+// Colors
+$color01: #041926
+$color02: #F2E529
+$color03: #F2D22E
+$color04: #D97B29
+$color05: #404040
+$color06: #FDFDFD
+$color07: #0f0f0f
+
+// Functions
+@function toRem($value)
+    $remValue: ($value / 16) + rem
+    @return $remValue
+
+*
+  margin: 0
+  padding: 0
+  text-decoration: none
+  box-sizing: border-box
+  font-family: 'Roboto', sans-serif
+  font-size: $size
+  // color: $color01
+
+h1, .text-headline1
+  font-size: 6rem
+  letter-spacing: -0.015em
+  font-weight: 300
+h2, .text-headline2
+  font-size: 3.75rem
+  letter-spacing: -0.005em
+  font-weight: 300
+h3, .text-headline3
+  font-size: 3rem
+  font-weight: 400
+h4, .text-headline4
+  font-size: 2.125rem
+  letter-spacing: 0.0025em
+  font-weight: 400
+h5, .text-headline5
+  font-size: 1.5rem
+  font-weight: 400
+h6, .text-headline6
+  font-size: 1.25rem
+  letter-spacing: 0.0015em
+  font-weight: 500
+.text-subtitle1
+  font-size: 1rem
+  letter-spacing: 0.0015em
+  font-weight: 400
+.text-subtitle2
+  font-size: 0.875rem
+  letter-spacing: 0.001em
+  font-weight: 500
+.text-body1
+  font-size: 1rem
+  letter-spacing: 0.005em
+  font-weight: 400
+.text-body2
+  font-size: 0.875rem
+  letter-spacing: 0.0025em
+  font-weight: 400
+.text-button
+  font-size: 0.875rem
+  letter-spacing: 0.0125em
+  font-weight: 500
+  text-transform: uppercase
+.text-caption
+  font-size: 0.75rem
+  letter-spacing: 0.004em
+  font-weight: 400
+.text-overline
+  font-size: 0.625rem
+  letter-spacing: 0.015em
+  font-weight: 400
+  text-transform: uppercase
+
+.text-light
+  font-weight: 300
+.text-normal
+  font-weight: 400
+.text-bold
+  font-weight: 500
+
+.text-color-white
+  color: $color06
+
+body
+  display: grid
+  grid-template-columns: 1fr
+  grid-template-rows: auto 1fr auto
+  width: 100vw
+  height: 100vh
+  background-color: $color01
+
+header, footer
+  display: flex
+  justify-content: center
+  align-items: center
+  background: $color06
+
+header
+  padding: toRem(16)
+footer
+  padding: toRem(8)
+
+main
+  display: flex
+  justify-content: center
+  align-items: center
+
+.card
+  min-width: toRem(344)
+  background-color: $color06
+  border-radius: toRem(4)
+  box-shadow: 0px 2px 4px rgba(15, 15, 15, .25)
+  .header, .content
+    display: flex
+    width: 100%
+    padding: toRem(16)
+  .content
+    justify-content: center
+  
