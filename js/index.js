@@ -1,6 +1,6 @@
 import TruthTable from './TruthTable.js'
 
-const content = document.querySelector('main')
+const table = document.querySelector('#truthTable')
 
 const typeMap = 3
 function getMatrixPermutation(dimension) {
@@ -28,4 +28,4 @@ function getMatrixPermutation(dimension) {
 const perm = getMatrixPermutation(typeMap) 
 
 console.log(new TruthTable(1, typeMap, perm).render())
-content.innerHTML = new TruthTable(1, typeMap, perm).render()
+table.innerHTML = new TruthTable(1, typeMap, perm).render()

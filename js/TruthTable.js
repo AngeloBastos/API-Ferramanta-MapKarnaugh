@@ -6,10 +6,8 @@ export default class TruthTable {
   }
   render() {
     return `
-      <table id="truthTable" style="color: white">
         ${new TableHead(this.typeMap).render()}
         ${new Permutation(this.typeMap, this.permutation).render()}
-    </table>
   `
   }
 }
@@ -28,6 +26,7 @@ class Permutation {
     for (let i = 0; i < typeMap; i++) {
       rowCols.push(this.renderCols(permutation[index][i]))
     }
+    rowCols.push(this.renderCols(`<button value="0">0</button>`))
     return rowCols.join('')
   }
   renderTableRow (permutation, index) {
