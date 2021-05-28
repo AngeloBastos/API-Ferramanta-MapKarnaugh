@@ -1,0 +1,39 @@
+.btn
+  color: $color01
+  font-size: 0.875rem
+  letter-spacing: 0.0125em
+  font-weight: 500
+  text-transform: uppercase
+  padding: 8px 16px
+  border: none
+  border-radius: toRem(4)
+  cursor: pointer
+  outline: none
+  background-color: $color03
+  &:hover
+    background-color: $color02
+
+.btn.btn-outline
+  background: none
+  border: 1px solid $color03
+  box-sizing: border-box
+  &:hover
+    background-color: transparentize($color02, .75)
+  &:active
+    background-color: transparentize($color02, .50)
+
+.btn.btn-text
+  background: none
+  &:hover
+    background-color: transparentize($color02, .75)
+  &:active
+    background-color: transparentize($color02, .50)
+
+.btn.btn-cell
+  width: 100%
+  height: 100%
+  background: none
+  &:hover
+    background-color: transparentize(gray, .90)
+  &:active
+    background-color: transparentize(gray, .80)
