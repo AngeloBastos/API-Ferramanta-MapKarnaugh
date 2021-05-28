@@ -26,7 +26,7 @@ class Permutation {
     for (let i = 0; i < typeMap; i++) {
       rowCols.push(this.renderCols(permutation[index][i]))
     }
-    rowCols.push(this.renderCols(`<button value="0">0</button>`))
+    rowCols.push(this.renderCols(`<button class="btn btn-cell" value="0">0</button>`))
     return rowCols.join('')
   }
   renderTableRow (permutation, index) {
