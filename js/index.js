@@ -1,31 +1,24 @@
-import TruthTable from './TruthTable.js'
+import KarnaughMap from './KarnaughMap.js'
 
+const radio = document.querySelector('.container-typemap')
 const table = document.querySelector('#truthTable')
 
-const typeMap = 3
-function getMatrixPermutation(dimension) {
-  let col = dimension
-  const row = Math.pow(2, dimension)
-  let supportingMatrix = []
-  for (let i = 0; i < row; i++) {
-    let temporaryMatrix = []
-    for (let j = 0; j < col; j++) {
-      temporaryMatrix[j] = 0
-    }
-    supportingMatrix[i] = temporaryMatrix 
-  }
-  for (let i = 0; i < col; i++) {
-    let count = (Math.pow(2, dimension) / 2)
-    for (let j = 0; j < row; j++) {
-      let bit = (j % (count * 2) < count ? 0 : 1)
-      supportingMatrix[j][i] = bit
-    }
-    dimension--
-  }
-  return supportingMatrix
-}
 
-const perm = getMatrixPermutation(typeMap) 
+new KarnaughMap().render()
+radio.addEventListener('change', (event) => {
+  new KarnaughMap(+event.target.value).render()
+})
 
-console.log(new TruthTable(1, typeMap, perm).render())
-table.innerHTML = new TruthTable(1, typeMap, perm).render()
+table.addEventListener('click', event => { // Altera o bit da tabela
+  const element = event.target.localName
+  if (element === 'button') {
+    const btn = event.target
+    if (+btn.value === 0) {
+      btn.value = 1
+      btn.innerText = 1
+    } else {
+      btn.value = 0
+      btn.innerText = 0
+    }
+  }
+})
