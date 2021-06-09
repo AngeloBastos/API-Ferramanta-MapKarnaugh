@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
   <title>Ferrameta: Mapa de Karnaugh</title>
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </head>
 <body>
   <header><h2>Mapa de Karnaugh</h2></header>
@@ -29,7 +30,7 @@
           <div class="text-body1">Escolha o tipo de mapa a ser exibido (número de variáveis):</div>
           <div class="container-typemap">
             <label class="text-body1">
-              <input type="radio" name="typeMap" value="2" checked> 2
+              <input type="radio" name="typeMap" value="2"> 2
           </label>
             <label class="text-body1">
               <input type="radio" name="typeMap" value="3"> 3
@@ -40,7 +41,7 @@
             
           </div>
           <div class="text-body1">Obtenha o resultado:</div>
-          <button class="btn">Calcular</button>
+          <button class="btn" data-solutioncalc>Calcular</button>
         </div>
       </div>
     </section>
@@ -50,7 +51,7 @@
           <div class="text-headline6">Diagrama</div>
         </div>
         <div class="content">
-          <div class="text-body1">teste</div>
+          <table class="k-map"></table>
         </div>
       </div>
     </section>
@@ -60,7 +61,7 @@
           <div class="text-headline6">Resultado</div>
         </div>
         <div class="content">
-          <div class="text-body1">teste</div>
+          <div class="text-body1" data-solution></div>
         </div>
       </div>
     </section>
