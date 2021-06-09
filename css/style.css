@@ -233,11 +233,6 @@ table#truthTable tbody td:last-of-type {
   transition: .3s;
 }
 
-table#truthTable tbody td:last-of-type:hover {
-  cursor: pointer;
-  background-color: #e7e7e7;
-}
-
 .card {
   width: 100%;
   height: auto;
@@ -326,6 +321,46 @@ table#truthTable tbody td:last-of-type:hover {
 
 .btn.btn-cell:active {
   background-color: rgba(128, 128, 128, 0.2);
+}
+
+.k-map {
+  width: 75%;
+  height: auto;
+  color: #041926;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.k-map td, .k-map th {
+  text-align: center;
+}
+
+.k-map td {
+  border: 1px solid #041926;
+}
+
+.k-map th {
+  padding: 0.25rem;
+}
+
+.k-map th hr {
+  border: 1px solid transparent;
+  border-bottom: 1px solid #041926;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.k-map th span {
+  position: relative;
+  font-size: .9rem;
+}
+
+.k-map th span.top-left {
+  left: 25%;
+}
+
+.k-map th span.bottom-right {
+  left: -25%;
 }
 
 .container-typemap {
