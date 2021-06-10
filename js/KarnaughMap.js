@@ -56,12 +56,10 @@ export default class KarnaughMap {
     let col = dimension
     let deep = 2
     let matrix = []
-
     if (dimension === 3) {
       row = 2
       col = 4
-    }
-    
+    } 
     for (let i = 0; i < row; i++) {
       let temporaryMatrix = []
       for (let j = 0; j < col; j++) {
@@ -76,22 +74,19 @@ export default class KarnaughMap {
     return matrix
   }
 
-  setMatrixSquare(value) {
+  setMatrixSquare (value) {
     const squares = this.state.squares
     const typeMap = this.state.typeMap
     let row = typeMap
     let col = typeMap
-
     if (typeMap === 3) {
       row = 2
       col = 4
     }
-
     for (let i = 0; i < row; i++)
       for (let j = 0; j < col; j++) {
         squares[i][j][0] = value;
       }
-    
     this.reset()
     this.setState({
       squares: squares
@@ -106,68 +101,62 @@ export default class KarnaughMap {
       row = 2
       col = 4
     }
-    // btn disabled
-
     for (let i = 0; i < row; i++) {
       for (let j = 0; j < col; j++) {
         const cellMap = document
           .querySelector(`[data-cellmap="${ String(i) + j}"]`)
-        // cellMap.classList.remove()
         for (let k = 0; k < 10; k++) {
           const cellMap = document
             .querySelector(`[data-cellmap="${ String(i) + j + k}"]`)
-          // cellMap.classList.remove()
         }
 
       }
     }
-
   }
 
   setCoord (squares, permutation, dimension) {
     let row = dimension
     let col = dimension
-
     if (dimension === 3) {
       row = 2
       col = 4
     }
-
     for (let i = 0; i < col; i++) {
       let l
-      if (i === 2) l = 3
-      else if (i === 3) l = 2
-      else l = i
-
+      if (i === 2) {
+        l = 3
+      } else if (i === 3) {
+        l = 2
+      } else {
+        l = i
+      }
       for (let j = 0; j < row; j++) {
         let k
-        if (j % row === 2) k = 3
-        else if (j % row === 3) k = 2
-        else k = j
-        
+        if (j % row === 2) {
+          k = 3
+        } else if (j % row === 3) {
+          k = 2
+        } else {
+          k = j
+        }
         let val = ''
         let tempDim = dimension
         let p = 0
-
         do {
           val += permutation[i * row + j][p]
           p++
         } while(p < tempDim / 2)
-
         squares[k][l][1] = val
         val = ''
         p = Math.floor(tempDim / 2)
-
         if (dimension === 3) {
           tempDim = 2
           p = Math.floor(tempDim / 2 + 1)
         }
-
         do {
           val += permutation[i * row + j][p]
           p++
         } while(p < tempDim)
-
         squares[k][l][2] = val
       }
     }
@@ -186,7 +175,7 @@ export default class KarnaughMap {
     })
   }
 
-  handleClick(indexRow, indexCol) {
+  handleClick (indexRow, indexCol) {
     const squares = this.state.squares
     if (squares[indexRow][indexCol][0] === 'X') {
       squares[indexRow][indexCol][0] = 0
@@ -195,7 +184,6 @@ export default class KarnaughMap {
     } else {
       squares[indexRow][indexCol][0] = 'X'
     }
-
     this.reset()
     this.setState({
       squares: squares
@@ -206,8 +194,7 @@ export default class KarnaughMap {
     let dimensionCol, dimensionRow
     const typeMap = this.state.typeMap
     const typeSol = this.state.typeSol
-    let valueSol = (typeSol === 'SOP')? 1 : 0
-    
+    const valueSol = (typeSol === "SOP") ? 1 : 0
     if (typeMap === 4) {
       dimensionCol = dimensionRow = 4
     } else if (typeMap === 3) {
@@ -216,34 +203,28 @@ export default class KarnaughMap {
     } else {
       dimensionCol = dimensionRow = 2
     }
-
     const groups = new Array(dimensionRow)
-
     for (let i = 0; i < dimensionRow; i++) {
       groups[i] = new Array(dimensionCol)
       for (let j = 0; j < dimensionCol; j++) {
         groups[i][j] = []
       }
     }
-
     let index = 0
-
     for (let i = 0; i < dimensionRow; i++) {
       for (let j = 0; j < dimensionCol; j++) {
         let count = 0
-
         if (squares[i][j][0] === valueSol) {
           let [tempIndexI, tempIndexJ] = [i, j]
-
           if (j === dimensionCol - 1) {
             let ok = true
             let countAux = 0
-
             for (let height = i; height < dimensionRow && ok; height++) {
-              if (squares[height][dimensionCol - 1][0] === valueSol && squares[height][0][0] === valueSol) {
-                groups[height][0].push(index)
-                groups[height][dimensionCol - 1].push(index)
-                countAux++
+              if (squares[height][dimensionCol - 1][0] === valueSol
+                && squares[height][0][0] === valueSol) {
+                  groups[height][0].push(index)
+                  groups[height][dimensionCol - 1].push(index)
+                  countAux++
               } else {
                 ok = false
               }
@@ -256,16 +237,15 @@ export default class KarnaughMap {
               }
             }
           }
-          
           if (i === dimensionRow - 1) {
             let ok = true
             let countAux = 0
-
             for (let column = j; column < dimensionCol && ok; column++) {
-              if (squares[dimensionRow - 1][column][0] === valueSol && squares[0][column][0] === valueSol) {
-                groups[dimensionRow - 1][column].push(index)
-                groups[0][column].push(index)
-                countAux++
+              if (squares[dimensionRow - 1][column][0] === valueSol
+                && squares[0][column][0] === valueSol) {
+                  groups[dimensionRow - 1][column].push(index)
+                  groups[0][column].push(index)
+                  countAux++
               } else {
                 ok = false
               }
@@ -278,34 +258,30 @@ export default class KarnaughMap {
               }
             }
           }
-          
           do {
-            groups[tempIndexJ][tempIndexJ].push(index)
-            count++
+            groups[tempIndexI][tempIndexJ].push(index)
+            count++;
             tempIndexJ++
-          } while (tempIndexJ < dimensionCol && squares[tempIndexI][tempIndexJ][0] === valueSol)
-          
+          } while (tempIndexJ < dimensionCol
+              && squares[tempIndexI][tempIndexJ][0] === valueSol)
           if (!isPower(2, count)) {
             groups[tempIndexI][tempIndexJ - 1].pop()
             count--
           }
-
           let countVer
           let depth = 100
           let isOk = true
-
           for (let change = 0; change < count; change++) {
             tempIndexI = i + 1
             tempIndexJ = j + change
             countVer = 1
-            
             while (tempIndexI < dimensionRow && countVer < depth) {
               if (squares[tempIndexI][tempIndexJ][0] !== valueSol) {
                 if (change !== 0 && countVer !== depth) {
-                  let rig  = tempIndexI
+                  let row = tempIndexI
                   if (!isPower(2, change)) {
                     if (!isPower(2, countVer)) {
-                      rig--
+                      row--
                     }
                     groups[tempIndexI][tempIndexJ].push(index)
                     if (tempIndexI >= depth) {
@@ -313,10 +289,11 @@ export default class KarnaughMap {
                     } else {
                       depth--
                     }
-                    for (_; rig <= depth; rig++) {
-                      for (let col = tempIndexJ - j; col < change; col++) {
-                        groups[rig][col].pop()
+                    while (row <= depth) {
+                      for (let col = tempIndexJ - 1; col <= change; col++) {
+                        groups[row][col].pop()
                       }
+                      row++
                     }
                     isOk = false
                   }
@@ -327,11 +304,9 @@ export default class KarnaughMap {
               tempIndexI++
               countVer++
             }
-
             if (countVer < depth) {
               depth = countVer
             }
-
             if (!isPower(2, countVer) && isOk) {
               groups[tempIndexI - 1][tempIndexJ].pop()
               depth--
@@ -341,8 +316,7 @@ export default class KarnaughMap {
         }
       }
     }
-
-    console.log("Algorithm:", {groups})
+    console.log("Algorithm:", groups)
     this.groupUp(squares, $.extend(true, [], groups))
   }
 
@@ -355,7 +329,6 @@ export default class KarnaughMap {
     let group2 = []
     let object1, object2
     let dimensionCol, dimensionRow
-
     if (typeMap === 4) {
       dimensionCol = dimensionRow = 4
     } else if (typeMap === 3) {
@@ -364,7 +337,6 @@ export default class KarnaughMap {
     } else {
       dimensionCol = dimensionRow = 2
     }
-
     if (squares[0][0][0] == valueSol
       && squares[0][dimensionCol - 1][0] === valueSol
       && squares[dimensionRow - 1][0][0] === valueSol
@@ -380,7 +352,6 @@ export default class KarnaughMap {
         groups.push(group1)
         group1 = []
     }
-
     for (let i = 0; i < dimensionRow; i++) {
       for (let j = 0; j < dimensionCol; j++) {
         if (squares[i][j][0] === valueSol) {
@@ -490,8 +461,6 @@ export default class KarnaughMap {
   cleanAlgorithm(groups) {
     groups.sort((a, b) => a.length - b.length)
     groups.reverse()
-    console.log('cleanAlgorithm:Rev', {groups})
-
     let temp = $.extend(true, [], groups)
     for (let i = 0; i < temp.length; i++) {
       for (let j = i + 1; j < temp.length; j++) {
@@ -706,7 +675,6 @@ export default class KarnaughMap {
         }
       }
     }
-    // console.log("DrawSolution:", solutionContainer)
   }
 
   render() {
