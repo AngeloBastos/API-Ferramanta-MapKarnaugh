@@ -105,6 +105,7 @@ h6, .text-headline6 {
 }
 
 body {
+  height: 100vh;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr;
