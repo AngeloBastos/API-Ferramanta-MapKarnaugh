@@ -518,7 +518,6 @@ export default class KarnaughMap {
     }
     console.log("CleanAlgorithm:", temp)
     this.solution(temp, groups)
-    this.drawGroup(temp, groups)
   }
 
   solution (temp, groups) {
