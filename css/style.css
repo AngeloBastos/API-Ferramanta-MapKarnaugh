@@ -323,6 +323,24 @@ table#truthTable tbody td:last-of-type {
   background-color: rgba(128, 128, 128, 0.2);
 }
 
+.container-typemap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 16px;
+}
+
+.container-typemap label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 8px;
+  gap: 8px;
+}
+
 .k-map {
   width: 75%;
   height: auto;
@@ -363,21 +381,29 @@ table#truthTable tbody td:last-of-type {
   left: -25%;
 }
 
-.container-typemap {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 16px;
+.groupSOP,
+.groupPOS,
+.plus {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  border-radius: 8px;
+  padding: 0.25rem 0.5rem;
+  text-align: center;
+  width: auto;
+  gap: 2px;
 }
 
-.container-typemap label {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 8px;
-  gap: 8px;
+.groupSOP span,
+.groupPOS span {
+  font-size: 0.875rem;
+  letter-spacing: 0.001em;
+  font-weight: bold;
+}
+
+.plus {
+  font-size: 0.875rem;
+  letter-spacing: 0.001em;
+  font-weight: bold;
 }
 /*# sourceMappingURL=style.css.map */
