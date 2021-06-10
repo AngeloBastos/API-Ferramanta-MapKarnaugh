@@ -12,7 +12,6 @@ export default class KarnaughMap {
       permutation: mattixPermutation, 
       typeSol: solutionAlgorithm
     }
-    console.log(this.state)
     this.render()
   }
 
@@ -519,7 +518,7 @@ export default class KarnaughMap {
     }
     console.log("CleanAlgorithm:", temp)
     this.solution(temp, groups)
-    // this.drawGroup(temp, groups)
+    this.drawGroup(temp, groups)
   }
 
   solution (temp, groups) {
@@ -682,21 +681,17 @@ export default class KarnaughMap {
     const typeMap = this.state.typeMap
     const permutation = this.state.permutation
     const typeSol = this.state.typeSol
-
     new TruthTable(
       values,
       typeMap,
       permutation
     )
-
     new Map(
       typeMap,
       values
     )
-
     const truthTable = document.querySelector('#truthTable')
     const solutionCalc = document.querySelector('[data-solutioncalc]')
-    
     truthTable.addEventListener('click', event => {
       if (event.target.attributes['data-celltab']) {
         const valueAttribbute = event.target.attributes[1].nodeValue
@@ -713,10 +708,7 @@ export default class KarnaughMap {
         this.handleClick(i, j)
       }
     })
-
     solutionCalc.addEventListener('click', () => this.algorithm(values))
-
-    console.log(this.state)
   }
 }
 
