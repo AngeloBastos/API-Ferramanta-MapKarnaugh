@@ -549,8 +549,164 @@ export default class KarnaughMap {
       }
     }
     console.log("CleanAlgorithm:", temp)
-    // this.solution(temp, groups)
+    this.solution(temp, groups)
     // this.drawGroup(temp, groups)
+  }
+
+  solution (temp, groups) {
+    const typeSol = this.state.typeSol 
+    let mainMatrix = this.state.squares
+    let alphabet = ['A', 'B', 'C', 'D']
+    let solution = ''
+    let arraySolution = []
+    let indexAlpha, indexCoord, indexCoordBinary
+    let elementRow, elementCol
+    let flag
+    let coord
+    let ner
+    for (let i = 0; i < temp.length; i++) {
+      if (temp[i].length > 0) {
+        indexAlpha = 0
+        elementRow = groups[i][0].row
+        elementCol = groups[i][0].col
+        ner = 0 
+        while (ner < groups[i].length
+          && groups[i][ner].row === elementRow) {
+            ner++
+        }
+        indexCoordBinary = 0
+        coord = mainMatrix[elementRow][elementCol][1]
+        while (indexCoordBinary < coord.length) {
+          indexCoord = 1
+          flag = true
+          while (indexCoord < groups[i].length
+            && groups[i][indexCoord].row === elementRow) {
+              if (coord.charAt(indexCoordBinary)
+                !== mainMatrix[elementRow][groups[i][indexCoord].col][1]
+                .charAt(indexCoordBinary)) {
+                  flag = false
+                  break
+              }
+              indexCoord++
+          }
+          if (flag) {
+            if (typeSol === 'SOP') {
+              if (coord.charAt(indexCoordBinary) === '0') {
+                solution += '!' + alphabet[indexAlpha]
+              } else {
+                solution += alphabet[indexAlpha]
+              }
+            } else {
+              if (coord.charAt(indexCoordBinary) === '0') {
+                solution += alphabet[indexAlpha]
+              } else {
+                solution += '!' + alphabet[indexAlpha]
+              }
+              solution += '+'
+            }
+          }
+          indexAlpha++
+          indexCoordBinary++
+        }
+        indexCoordBinary = 0
+        coord = mainMatrix[elementRow][elementCol][2]
+        while (indexCoordBinary < coord.length) {
+          indexCoord = ner
+          flag = true
+          while (indexCoord < groups[i].length
+            && groups[i][indexCoord].col === elementCol) {
+              if (coord.charAt(indexCoordBinary)
+                !== mainMatrix[groups[i][indexCoord].row][elementCol][2]
+                .charAt(indexCoordBinary)) {
+                  flag = false
+                  break
+              }
+              indexCoord += ner
+          }
+          if (flag) {
+            if (typeSol === 'SOP') {
+              if (coord.charAt(indexCoordBinary) === '0') {
+                solution += '!' + alphabet[indexAlpha]
+              } else {
+                solution += alphabet[indexAlpha]
+              }
+            } else {
+              if (coord.charAt(indexCoordBinary) === '0') {
+                solution += alphabet[indexAlpha]
+              } else {
+                solution += '!' + alphabet[indexAlpha]
+              }
+              solution += '+'
+            }
+          }
+          indexAlpha++
+          indexCoordBinary++
+        }
+        if (typeSol === 'POS') {
+          solution = solution.substr(0, solution.length -1)
+        }
+        arraySolution.push(solution)
+        solution = ''
+      }
+    }
+    if (arraySolution[0] === '' || !arraySolution[0]) {
+      if (mainMatrix[0][0][0] === 0) {
+        arraySolution[0] = '0'
+      } else {
+        arraySolution[0] = '1'
+      }
+    }
+    console.log("Solution:", arraySolution)
+    this.drawSolution(arraySolution)
+  }
+
+  drawSolution (arraySolution) {
+    const solutionContainer = document.querySelector('[data-solution]')
+    const typeSol = this.state.typeSol
+    let literalCost = 0
+    if (arraySolution[0] === '0' || arraySolution[0] === '1') {
+      const div = document.createElement('div')
+      div.innerText = arraySolution[0]
+      solutionContainer.append(div)
+    } else {
+      const symbol = typeSol === 'SOP' ? '+' : '.'
+      const cls = typeSol === 'SOP' ? 'groupSOP' : 'groupPOS'
+      const colors = [
+        'red','blue', 'green',
+        'orange', '#50C878','lightblue',
+        '#CD7F32','#ff6699'
+      ]
+      for (let i = 0; i < arraySolution.length; i++) {
+        const div = document.createElement('div')
+        div.setAttribute('class', `${cls}`)
+        div.setAttribute('data-solution', i)
+        div.setAttribute('style', `border: 1px solid ${colors[i]}`)
+        solutionContainer.append(div)
+        for (let j =0; j < arraySolution[i].length; j++) {
+          if (arraySolution[i][j] !== '!') {
+            const span = document.createElement('span')
+            span.setAttribute('style', `color: ${colors[i]}`)
+            span.innerText = arraySolution[i][j]
+            document.querySelector(`[data-solution="${i}"]`).append(span)
+          } else {
+            const span = document.createElement('span')
+            span.setAttribute('style', `text-decoration: overline; color: ${colors[i]}`)
+            span.innerText = arraySolution[i][++j]
+            document.querySelector(`[data-solution="${i}"]`).append(span)
+          }
+          if (arraySolution[i][j] !== '+') {
+            literalCost++
+          }
+        }
+        if (i !== arraySolution.length - 1) {
+          const div = document.createElement('div')
+          div.setAttribute('class', 'plus')
+          div.innerText = symbol
+          solutionContainer.append(div)
+        }
+      }
+    }
+    // console.log("DrawSolution:", solutionContainer)
   }
 
   render() {
